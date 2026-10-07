@@ -1,0 +1,210 @@
+<header class="site-header">
+  <nav class="container navigation" aria-label="Navigation principale">
+    <a class="brand" href="#accueil" aria-label="Retour à l’accueil"
+      >EC<span>.</span></a
+    >
+    <div class="nav-links">
+      <a href="#a-propos">{{ text.nav["about"] }}</a>
+      <a href="#competences">{{ text.nav["skills"] }}</a>
+      <a href="#experiences">{{ text.nav["experience"] }}</a>
+      <a href="#projets">{{ text.nav["projects"] }}</a>
+      <a href="#formation">{{ text.nav["education"] }}</a>
+      <a href="#contact">{{ text.nav["contact"] }}</a>
+    </div>
+    <div class="nav-actions">
+      <button
+        class="language-button"
+        type="button"
+        [attr.aria-label]="
+          language === 'fr' ? 'Switch to English' : 'Passer en français'
+        "
+        (click)="setLanguage(language === 'fr' ? 'en' : 'fr')"
+      >
+        {{ language === "fr" ? "EN" : "FR" }}
+      </button>
+      <button
+        class="theme-button"
+        type="button"
+        aria-label="Changer de thème"
+        (click)="toggleTheme()"
+      >
+        {{ darkMode ? "☼" : "☾" }}
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <section id="accueil" class="hero">
+    <div class="container hero-grid">
+      <div>
+        <p class="eyebrow">{{ text.hero["eyebrow"] }}</p>
+        <h1>{{ text.hero["title"] }}</h1>
+        <p class="hero-intro">{{ text.hero["intro"] }}</p>
+        <p class="availability">
+          <span aria-hidden="true">●</span> {{ text.hero["availability"] }}
+        </p>
+        <div class="button-row">
+          <a class="button button-primary" href="assets/cv-ethan-cabanes.pdf">{{
+            text.hero["cv"]
+          }}</a>
+          <a class="button button-secondary" href="#contact">{{
+            text.hero["contact"]
+          }}</a>
+        </div>
+      </div>
+      <aside class="hero-card" aria-label="Profil">
+        <span class="hero-mark">EC</span>
+        <p>Ingénierie logicielle<br />Solutions numériques en santé</p>
+      </aside>
+    </div>
+  </section>
+
+  <section id="a-propos" class="section">
+    <div class="container narrow">
+      <p class="section-kicker">01</p>
+      <h2>{{ text.about["title"] }}</h2>
+      <p class="lead">{{ text.about["text"] }}</p>
+    </div>
+  </section>
+
+  <section id="competences" class="section section-tinted">
+    <div class="container">
+      <p class="section-kicker">02</p>
+      <h2>{{ text.nav["skills"] }}</h2>
+      <div class="skills-grid">
+        @for (group of text.skills; track group.title) {
+          <article class="skill-card">
+            <h3>{{ group.title }}</h3>
+            <ul>
+              @for (item of group.items; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="experiences" class="section">
+    <div class="container">
+      <p class="section-kicker">03</p>
+      <h2>{{ text.nav["experience"] }}</h2>
+      <div class="timeline">
+        @for (
+          experience of text.experiences;
+          track experience.title + experience.period
+        ) {
+          <article class="timeline-item">
+            <div class="timeline-marker" aria-hidden="true"></div>
+            <div class="timeline-content">
+              <p class="period">{{ experience.period }}</p>
+              <h3>{{ experience.title }}</h3>
+              <p class="place">{{ experience.place }}</p>
+              <p><strong>Contexte :</strong> {{ experience.context }}</p>
+              <p><strong>Réalisations :</strong> {{ experience.work }}</p>
+              <p>
+                <strong>Technologies :</strong> {{ experience.technologies }}
+              </p>
+              <p><strong>Apport :</strong> {{ experience.contribution }}</p>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="projets" class="section section-tinted">
+    <div class="container">
+      <p class="section-kicker">04</p>
+      <h2>{{ text.nav["projects"] }}</h2>
+      <div class="project-grid">
+        @for (project of text.projects; track project.title) {
+          <article class="project-card">
+            <div class="project-topline">
+              <span class="project-number">0{{ $index + 1 }}</span
+              ><span class="tag">{{ project.status }}</span>
+            </div>
+            <h3>{{ project.title }}</h3>
+            <p>{{ project.description }}</p>
+            <p class="stack">{{ project.stack }}</p>
+            <span class="todo">{{ project.link }}</span>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="formation" class="section">
+    <div class="container two-columns">
+      <div>
+        <p class="section-kicker">05</p>
+        <h2>{{ text.nav["education"] }}</h2>
+        @for (item of text.education; track item.title) {
+          <article class="list-item">
+            <p class="period">{{ item.period }}</p>
+            <h3>{{ item.title }}</h3>
+            <p class="place">{{ item.place }}</p>
+            <p>{{ item.details }}</p>
+          </article>
+        }
+      </div>
+      <div class="associations">
+        <p class="section-kicker">06</p>
+        <h2>Vie associative</h2>
+        @for (item of text.associations; track item.title) {
+          <article class="list-item">
+            <p class="period">{{ item.period }}</p>
+            <h3>{{ item.title }}</h3>
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section contact-section">
+    <div class="container contact-card">
+      <div>
+        <p class="section-kicker">07</p>
+        <h2>{{ text.contact["title"] }}</h2>
+        <p class="lead">{{ text.contact["text"] }}</p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:ethan.cabanes@gmail.com"
+          ><span>{{ text.contact["emailLabel"] }}</span
+          >ethan.cabanes&#64;gmail.com</a
+        >
+        <a
+          href="https://github.com/ethan8134"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="GitHub d’Ethan Cabanes"
+        >{{
+          text.contact["github"]
+        }}</a>
+        <a
+          href="https://www.linkedin.com/in/ethan-cabanes-128485253"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="LinkedIn d’Ethan Cabanes"
+          >{{ text.contact["linkedin"] }}</a
+        >
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-content">
+    <p>{{ text.footer["text"] }}</p>
+    <div>
+      <a
+        href="assets/cv-ethan-cabanes.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        >{{ text.footer["cv"] }}</a
+      ><span aria-hidden="true">·</span><span>{{ text.footer["legal"] }}</span>
+    </div>
+  </div>
+</footer>
