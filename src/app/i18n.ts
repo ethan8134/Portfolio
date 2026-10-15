@@ -3,6 +3,7 @@ export type Language = "fr" | "en";
 export interface PortfolioContent {
   nav: Record<string, string>;
   hero: Record<string, string>;
+  meta: { title: string; description: string };
   about: Record<string, string>;
   skills: { title: string; items: string[] }[];
   experiences: {
@@ -19,7 +20,9 @@ export interface PortfolioContent {
     status: string;
     description: string;
     stack: string;
-    link: string;
+    role: string;
+    github: string;
+    demo: string;
   }[];
   education: {
     period: string;
@@ -33,24 +36,13 @@ export interface PortfolioContent {
 }
 
 const commonSkills = {
-  backend: [
-    "Java",
-    "Spring Boot",
-    "API REST",
-    "C#",
-    "C / C++",
-    "Kotlin",
-    "Python",
-  ],
-  frontend: ["Angular", "Vue.js", "HTML / CSS", "JavaScript"],
   data: [
-    "SQL / HQL",
+    "SQL / HQL / JPQL",
     "Hibernate",
-    "MySQL / MariaDB",
+    "MySQL / MariaDB / PostgreSQL",
     "Apache POI",
     "Tests d’API avec curl",
   ],
-  ops: ["Linux", "SSH", "Git / GitLab", "Docker", "Kubernetes"],
   languages: [
     "Français — langue maternelle",
     "Anglais — C1, TOEIC 975 / 990",
@@ -66,7 +58,13 @@ export const content: Record<Language, PortfolioContent> = {
       experience: "Expériences",
       projects: "Projets",
       education: "Formation",
+      association: "Vie associative",
       contact: "Contact",
+    },
+    meta: {
+      title: "Ethan Cabanes — Étudiant ingénieur en informatique pour la santé",
+      description:
+        "Portfolio d’Ethan Cabanes, étudiant ingénieur en informatique pour la santé à la recherche d’un stage de fin d’études.",
     },
     hero: {
       eyebrow: "Ethan Cabanes",
@@ -75,6 +73,7 @@ export const content: Record<Language, PortfolioContent> = {
       intro:
         "Je recherche un stage de 22 à 26 semaines à partir du 25/01/2027, dans une structure liée à la santé, sur des sujets d’ingénierie logicielle, de cloud ou de DevOps.",
       availability: "Disponible à partir du 25/01/2027",
+      photoAlt: "Photo de profil d’Ethan Cabanes",
       cv: "Télécharger mon CV",
       contact: "Me contacter",
     },
@@ -83,11 +82,34 @@ export const content: Record<Language, PortfolioContent> = {
       text: "Étudiant en dernière année du cycle ingénieur de l’école ISIS Castres, je me forme à l’ingénierie et au développement de solutions numériques en santé. Je suis plus à l’aise côté serveur et je souhaite évoluer vers un profil de développeur full-stack Java / Angular. J’attache une grande importance à la fiabilité des données, à la compréhension du contexte métier et à la qualité du code. Je recherche un stage de fin d’études à Béziers, Montpellier, Toulouse ou à distance.",
     },
     skills: [
-      { title: "Backend", items: commonSkills.backend },
-      { title: "Frontend", items: commonSkills.frontend },
+      {
+        title: "Back-end",
+        items: [
+          "Java",
+          "Spring Boot",
+          "Hibernate / HQL",
+          "API REST",
+          "GraphQL",
+        ],
+      },
+      {
+        title: "Front-end",
+        items: ["Angular", "Vue.js", "TypeScript", "JavaScript", "HTML", "CSS"],
+      },
       { title: "Données", items: commonSkills.data },
-      { title: "DevOps et systèmes", items: commonSkills.ops },
-      { title: "Langues", items: commonSkills.languages },
+      {
+        title: "Cloud et DevOps",
+        items: [
+          "Domaine visé : cloud et DevOps",
+          "Linux",
+          "SSH",
+          "Docker et Kubernetes — projet Athletica",
+        ],
+      },
+      {
+        title: "Langues et certification",
+        items: [...commonSkills.languages, "Pix : 498 pix"],
+      },
     ],
     experiences: [
       {
@@ -99,7 +121,7 @@ export const content: Record<Language, PortfolioContent> = {
         work: "Mise en place d’un accès multi-bases, calcul et persistance d’indicateurs, exposition d’une API REST et comparaison des résultats avec l’historique de l’ancien outil.",
         technologies: "Java, Spring Boot, Hibernate, HQL, API REST",
         contribution:
-          "J’ai pu mettre en pratique une démarche de réimplémentation et de validation des résultats, sans rattacher à ce projet mes connaissances en Docker et Kubernetes.",
+          "J’ai pu mettre en pratique une démarche de réimplémentation et de validation des résultats.",
       },
       {
         period: "Avril — juin 2025",
@@ -129,17 +151,32 @@ export const content: Record<Language, PortfolioContent> = {
         title: "Jeu incrémental",
         status: "En cours de développement",
         description:
-          "Projet personnel de jeu incrémental de type « Adventure Capitalist », avec un frontend Angular et un backend Spring Boot REST.",
-        stack: "Angular · Spring Boot · REST",
-        link: "TODO — ajouter le lien GitHub",
+          "Projet réalisé en binôme avec Enzo Ferrier dans le module « Architectures orientées service » (ISIS, FIE5, S9). Recréation d’un jeu de gestion incrémentale de type AdVentureCapitalist dans l’univers de la série Invincible. Fonctionnalités : cycles de production, achats avec multiplicateurs, managers, paliers, améliorations, reset avec bonus permanent et sauvegarde par joueur.",
+        stack: "Angular · NestJS · GraphQL · tests automatisés",
+        role: "Rôle d’Ethan : développeur full-stack",
+        github: "https://github.com/eferrier81/InvincibleCapitalist",
+        demo: "Démo : TODO",
       },
       {
-        title: "Futurs projets",
-        status: "Emplacement réservé",
+        title: "PTUT_Athletica",
+        status: "TODO",
         description:
-          "TODO — compléter cette carte avec un futur projet, sa description et son lien.",
-        stack: "TODO",
-        link: "TODO — ajouter un lien",
+          "Projet tutoré de FIE 3 (2024-2025), réalisé en équipe de trois avec un client réel et encadré par un tuteur pédagogique. Méthode ScrumBan avec Trello et sprints de deux semaines. Application web de suivi des performances en course à pied : enregistrement de sessions, indicateurs personnalisés, mesures associées et visualisation de la progression sous forme de graphiques.",
+        stack:
+          "Vue.js · Vuetify · Spring Boot · H2 · Git/GitHub · GitHub Actions · Docker · Kubernetes",
+        role: "Rôle : chef de projet, développement du frontend, tests et mise en place du déploiement Kubernetes",
+        github: "https://github.com/ethan8134/PTUT_Athletica",
+        demo: "Démo : TODO",
+      },
+      {
+        title: "ProjetPharmacie",
+        status: "TODO",
+        description:
+          "Application web développée avec Vue 3 et Vite, qui simule la gestion des stocks de médicaments d’une pharmacie. Fonctionnalités : navigation entre plusieurs pages, formulaires d’ajout, de modification et de suppression. Persistance des données : TODO.",
+        stack: "Vue 3 · Vite",
+        role: "Rôle : TODO",
+        github: "https://github.com/ethan8134/ProjetPharmacie",
+        demo: "Démo : TODO",
       },
     ],
     education: [
@@ -190,7 +227,13 @@ export const content: Record<Language, PortfolioContent> = {
       experience: "Experience",
       projects: "Projects",
       education: "Education",
+      association: "Associations",
       contact: "Contact",
+    },
+    meta: {
+      title: "Ethan Cabanes — Engineering student in healthcare IT",
+      description:
+        "Ethan Cabanes’ portfolio, an engineering student in healthcare IT seeking a final-year internship.",
     },
     hero: {
       eyebrow: "Ethan Cabanes",
@@ -199,6 +242,7 @@ export const content: Record<Language, PortfolioContent> = {
       intro:
         "I am looking for a 22-to-26-week internship starting on 25 January 2027, in a health-related organisation, focused on software engineering, cloud or DevOps.",
       availability: "Available from 25 January 2027",
+      photoAlt: "Profile photo of Ethan Cabanes",
       cv: "Download my CV",
       contact: "Contact me",
     },
@@ -212,37 +256,41 @@ export const content: Record<Language, PortfolioContent> = {
         items: [
           "Java",
           "Spring Boot",
+          "Hibernate / HQL",
           "REST APIs",
-          "C#",
-          "C / C++",
-          "Kotlin",
-          "Python",
+          "GraphQL",
         ],
       },
       {
         title: "Frontend",
-        items: ["Angular", "Vue.js", "HTML / CSS", "JavaScript"],
+        items: ["Angular", "Vue.js", "TypeScript", "JavaScript", "HTML", "CSS"],
       },
       {
         title: "Data",
         items: [
-          "SQL / HQL",
+          "SQL / HQL / JPQL",
           "Hibernate",
-          "MySQL / MariaDB",
+          "MySQL / MariaDB / PostgreSQL",
           "Apache POI",
           "API testing with curl",
         ],
       },
       {
-        title: "DevOps and systems",
-        items: ["Linux", "SSH", "Git / GitLab", "Docker", "Kubernetes"],
+        title: "Cloud and DevOps",
+        items: [
+          "Target area: cloud and DevOps",
+          "Linux",
+          "SSH",
+          "Docker and Kubernetes — Athletica project",
+        ],
       },
       {
-        title: "Languages",
+        title: "Languages and certification",
         items: [
           "French — native",
           "English — C1, TOEIC 975 / 990",
           "Spanish — B1",
+          "Pix: 498 pix",
         ],
       },
     ],
@@ -256,7 +304,7 @@ export const content: Record<Language, PortfolioContent> = {
         work: "Implemented multi-database access, indicator calculation and persistence, a REST API, and result comparison with the former tool’s history.",
         technologies: "Java, Spring Boot, Hibernate, HQL, REST API",
         contribution:
-          "This project gave me practical experience in reimplementation and result validation. Docker and Kubernetes were not part of this internship.",
+          "This project gave me practical experience in reimplementation and result validation.",
       },
       {
         period: "April — June 2025",
@@ -286,17 +334,32 @@ export const content: Record<Language, PortfolioContent> = {
         title: "Incremental game",
         status: "In development",
         description:
-          "Personal incremental game project inspired by « Adventure Capitalist », with an Angular frontend and a Spring Boot REST backend.",
-        stack: "Angular · Spring Boot · REST",
-        link: "TODO — add GitHub link",
+          "Project developed with Enzo Ferrier for the Service-Oriented Architectures module (ISIS, FIE5, S9). Recreation of an incremental management game inspired by AdVentureCapitalist in the universe of the Invincible series. Features: production cycles, multiplier-based purchases, managers, milestones, upgrades, reset with a permanent bonus and player saves.",
+        stack: "Angular · NestJS · GraphQL · automated tests",
+        role: "Ethan’s role: full-stack developer",
+        github: "https://github.com/eferrier81/InvincibleCapitalist",
+        demo: "Demo: TODO",
       },
       {
-        title: "Future projects",
-        status: "Placeholder",
+        title: "PTUT_Athletica",
+        status: "TODO",
         description:
-          "TODO — complete this card with a future project, its description and its link.",
-        stack: "TODO",
-        link: "TODO — add a link",
+          "FIE 3 tutored project (2024–2025), developed by a team of three with a real client and supervised by an academic tutor. ScrumBan method using Trello and two-week sprints. Web application for monitoring running performance: session recording, custom indicators, associated measurements and progress charts.",
+        stack:
+          "Vue.js · Vuetify · Spring Boot · H2 · Git/GitHub · GitHub Actions · Docker · Kubernetes",
+        role: "Role: project lead, frontend development, testing and Kubernetes deployment setup",
+        github: "https://github.com/ethan8134/PTUT_Athletica",
+        demo: "Demo: TODO",
+      },
+      {
+        title: "ProjetPharmacie",
+        status: "TODO",
+        description:
+          "Web application developed with Vue 3 and Vite, simulating medication stock management for a pharmacy. Features: navigation between several pages, and forms for adding, editing and deleting items. Data persistence: TODO.",
+        stack: "Vue 3 · Vite",
+        role: "Role: TODO",
+        github: "https://github.com/ethan8134/ProjetPharmacie",
+        demo: "Demo: TODO",
       },
     ],
     education: [
